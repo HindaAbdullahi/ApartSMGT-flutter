@@ -234,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
         label: Row(
           children: [
             Icon(Icons.add),
-            Text('Add Employee'),
+            Text('Add gurantors'),
           ],
         ),
       ),
