@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
-import 'package:appart/widgets/drawer.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:appart/screen/guarantor.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:appart/widgets/drawer.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:appart/screen/guarantor.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -228,16 +234,17 @@ class _HomeScreenState extends State<HomeScreen> {
       )),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
-          Navigator.pushNamed(context, '/add_empolyee');
+          Navigator.pushNamed(context, 'guarantors');
         }
         ,
         label: Row(
           children: [
             Icon(Icons.add),
-            Text('Add gurantors'),
+            Text('Add guarantor'),
           ],
         ),
       ),
+      
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:appart/models/gurantorModel.dart';
 import 'package:appart/screen/update-guarantor-scree.dart';
-
+import 'package:appart/widgets/drawer.dart';
 import '../../api/api.dart';
 
 class GuarantorList extends StatefulWidget {
@@ -59,7 +59,7 @@ class _GuarantorListState extends State<GuarantorList> {
     return WillPopScope(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Guarantor"),
+          title:const Text("Guarantor"),
         ),
         body: SafeArea(
           child: Center(
@@ -72,14 +72,14 @@ class _GuarantorListState extends State<GuarantorList> {
                   return Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(12.0),
+                        padding:const EdgeInsets.all(12.0),
                         child: Material(
-                          borderRadius: BorderRadius.all(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(8.0),
                           ),
                           elevation: 1,
                           child: TextFormField(
-                            decoration: InputDecoration(
+                            decoration:const InputDecoration(
                               prefixIcon: Icon(Icons.search),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
@@ -107,7 +107,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                     .contains(searchString.toLowerCase())
                                 ? ListTile(
                                     dense: true,
-                                    shape: RoundedRectangleBorder(
+                                    shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
                                     tileColor: Colors.blueGrey[100],
@@ -142,7 +142,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                         showDialog(
                                           context: context,
                                           builder: ((context) {
-                                            return AlertDialog(
+                                            return const AlertDialog(
                                               backgroundColor:
                                                   Colors.transparent,
                                               content: ClipRRect(
@@ -163,11 +163,11 @@ class _GuarantorListState extends State<GuarantorList> {
                                         backgroundColor: Colors.blueGrey[200],
                                         child: guarantors[index].gender ==
                                                 'female'
-                                            ? Icon(
+                                            ? const Icon(
                                                 Icons.house,
                                                 color: Colors.green,
                                               )
-                                            : Icon(
+                                            : const Icon(
                                                 Icons.house,
                                                 color: Colors.blueGrey,
                                               ),
@@ -175,11 +175,11 @@ class _GuarantorListState extends State<GuarantorList> {
                                     ),
                                     title: Text(
                                       guarantors[index].name.toString(),
-                                      style: TextStyle(color: Colors.black),
+                                      style: const TextStyle(color: Colors.black),
                                     ),
                                     subtitle: Text(
                                       guarantors[index].address.toString(),
-                                      style: TextStyle(color: Colors.black),
+                                      style: const TextStyle(color: Colors.black),
                                     ),
                                     // trailing:
                                     trailing: Row(
@@ -187,7 +187,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         IconButton(
-                                            onPressed: () {
+                                              onPressed: () {
                                               print(guarantors[index].id);
                                               print(guarantors[index].name);
                                               print(
@@ -222,7 +222,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                                 ),
                                               );
                                             },
-                                            icon: Icon(
+                                            icon:const Icon(
                                               Icons.edit,
                                               color: Colors.blue,
                                             )),
@@ -248,7 +248,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                                       'Something went wrong!');
                                             }
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.delete,
                                             color: Colors.red,
                                           ),
@@ -263,24 +263,25 @@ class _GuarantorListState extends State<GuarantorList> {
                     ],
                   );
                 } else if (snapshot.hasError) {
-                  return Text('No apartment found!');
+                  return const Text('No guarantor found!');
                 }
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               },
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.pushNamed(context, 'add_guarantor');
-          },
-          label: Row(
-            children: [
-              Icon(Icons.add),
-              Text('Add Guaramtor'),
-            ],
-          ),
+       floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){
+          Navigator.pushNamed(context, '/add_guarantor');
+        }
+        ,
+        label: Row(
+          children: [
+            Icon(Icons.add),
+            Text('Add guarantor'),
+          ],
         ),
+      ),
       ),
       onWillPop: () {
         Navigator.pushNamed(context, 'home');

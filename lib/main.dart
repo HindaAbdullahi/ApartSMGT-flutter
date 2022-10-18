@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:appart/screen/home-screen.dart';
-import 'package:appart/screen/login_and_signup/login_screen.dart';
-import 'package:appart/screen/login_and_signup/profile_screen.dart';
-import 'package:appart/screen/login_and_signup/user-screen.dart';
+import 'package:appart/screen/add-guarantor-screen.dart';
+import 'package:appart/screen/guarantor.dart';
+import 'package:appart/screen/update-guarantor-scree.dart';
 import 'package:appart/screen/welcome-screen.dart';
+
 
 void main() async{
   
@@ -22,8 +23,13 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MyHomePage(),
         'home': (context) => HomeScreen(),
-        'login_screen': (context) => LoginPage(),
-        
+        // 'login_screen': (context) => LoginPage(),
+        '/guarantors':   (context)=> GuarantorList(),
+        '/add_guarantor' :  (context)=> AddGuarantorScreen(),
+        '/update_guarantor' :  (context)=> UpdateGuarantorScreen(),
+          'apartments':   (context)=> GuarantorList(),
+        '/add_apartment' :  (context)=> AddGuarantorScreen(),
+        '/update_apartment' :  (context)=> UpdateGuarantorScreen(),
       },
       theme: ThemeData(primarySwatch: Colors.blueGrey),
   
@@ -43,6 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
   
   @override
   Widget build(BuildContext context) {
-    return WelcomeScreen();
+    return GuarantorList();
   }
 }

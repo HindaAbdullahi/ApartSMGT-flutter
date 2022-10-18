@@ -274,8 +274,8 @@ class _AddGuarantorScreenState extends State<AddGuarantorScreen> {
                     name: guarantorNameController.text,
                     phone: guarantorPhoneController.text,
                     address: guarantorAddressController.text,
-                    gender: _selectedGender);
-                    title: guarantorTitleController.text;
+                    gender: _selectedGender,
+                    title: guarantorTitleController.text );
                 print(res.body);
 
                 if (res.statusCode == 200) {
@@ -288,10 +288,10 @@ class _AddGuarantorScreenState extends State<AddGuarantorScreen> {
                   // hide button circle progress indicator
                   setState(() {
                     saving = false;
-                  });
-
+                  }); 
+                  //button 
                   // Go to guarantor screen
-                  Navigator.pushNamed(  context, 'guarantors');
+                  Navigator.pushNamed(  context, '/guarantors');
                   print('Success');
                 } else {
                   _showError(error: 'Something went wrong!');

@@ -44,11 +44,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 ),
               ),
               drawerItem(
-                  leadingIcon: Icons.house, titleText: 'Dashboard', route: '/'),
+                  leadingIcon: Icons.house, titleText: 'Dashboard', route: ''),
               drawerItem(
                   leadingIcon: FontAwesomeIcons.peopleGroup,
-                  titleText: 'Guarentors',
-                  route: '/guarentors'),
+                  titleText: 'Guarantors',
+                  route: 'guarantors'),
               drawerItem(
                   leadingIcon: FontAwesomeIcons.peopleGroup,
                   titleText: 'Tenants',
