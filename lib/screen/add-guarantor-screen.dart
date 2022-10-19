@@ -52,10 +52,11 @@ class _AddGuarantorScreenState extends State<AddGuarantorScreen> {
     guarantorNameController.clear();
     guarantorPhoneController.clear();
     guarantorAddressController.clear();
-    guarantorTitleController.clear();
+   
     setState(() {
       _selectedGender = 'female';
     });
+     guarantorTitleController.clear();
   }
 
   @override
@@ -291,7 +292,7 @@ class _AddGuarantorScreenState extends State<AddGuarantorScreen> {
                   }); 
                   //button 
                   // Go to guarantor screen
-                  Navigator.pushNamed(  context, '/guarantors');
+                  Navigator.pushNamed(  context, 'guarantors');
                   print('Success');
                 } else {
                   _showError(error: 'Something went wrong!');

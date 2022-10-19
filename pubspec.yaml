@@ -48,6 +48,7 @@ dependencies:
   fluttericon: ^2.0.0
   material: ^1.0.0+2
   internet_connection_checker: ^1.0.0+1
+  connectivity_plus: ^3.0.0
  
 
 dev_dependencies:

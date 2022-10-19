@@ -48,7 +48,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               drawerItem(
                   leadingIcon: FontAwesomeIcons.peopleGroup,
                   titleText: 'Guarantors',
-                  route: 'guarantors'),
+                  route: '/guarantors'),
               drawerItem(
                   leadingIcon: FontAwesomeIcons.peopleGroup,
                   titleText: 'Tenants',

@@ -215,7 +215,7 @@ class _UpdateGuarantorScreenState extends State<UpdateGuarantorScreen> {
                             },
                           ),
                           title: const Text(
-                            'Occupied',
+                            'male',
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

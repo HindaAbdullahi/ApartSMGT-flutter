@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:appart/models/gurantorModel.dart';
 import 'package:appart/screen/update-guarantor-scree.dart';
-import 'package:appart/widgets/drawer.dart';
+
 import '../../api/api.dart';
 
 class GuarantorList extends StatefulWidget {
@@ -19,20 +19,20 @@ class GuarantorList extends StatefulWidget {
 class _GuarantorListState extends State<GuarantorList> {
   TextEditingController searchFieldController = new TextEditingController();
 
-  late Future<List<Guarantor>> guarantorList;
+  late Future<List<Guarantor>> apartmentList;
 
   String searchString = '';
 
   // get all apartments
-  Future<List<Guarantor>> _getAllGuarantor() async {
+  Future<List<Guarantor>> _getAllGuarant() async {
     http.Response response =
-        await http.get(Uri.parse(Api.url + '/get-all-guarantor'));
+        await http.get(Uri.parse(Api.url + '/get-all-guarants'));
 
     if (response.statusCode == 200) {
       List jsonResponse = await json.decode(response.body)['data'];
 
       return jsonResponse
-          .map((guarantor) => Guarantor.fromJson(guarantor))
+          .map((guarant) => Guarantor.fromJson(guarant))
           .toList();
     } else {
       throw Exception('Unexpected error occured!');
@@ -40,16 +40,16 @@ class _GuarantorListState extends State<GuarantorList> {
   }
 
   // Delete apartment
-  _deleteGuarantor({id}) async {
+  _deleteGuarant({id}) async {
     http.Response response =
-        await http.delete(Uri.parse(Api.url + "/delete-guarantor/${id}"));
+        await http.delete(Uri.parse(Api.url + "/delete-guarant/${id}"));
     return response;
   }
 
   @override
   void initState() {
 
-    guarantorList = _getAllGuarantor();
+    apartmentList = _getAllGuarant();
 
     super.initState();
   }
@@ -59,12 +59,12 @@ class _GuarantorListState extends State<GuarantorList> {
     return WillPopScope(
       child: Scaffold(
         appBar: AppBar(
-          title:const Text("Guarantor"),
+          title: Text("Guarantor"),
         ),
         body: SafeArea(
           child: Center(
             child: FutureBuilder(
-              future: guarantorList,
+              future: apartmentList,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<Guarantor> guarantors = snapshot.data!;
@@ -72,21 +72,21 @@ class _GuarantorListState extends State<GuarantorList> {
                   return Column(
                     children: [
                       Padding(
-                        padding:const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Material(
-                          borderRadius: const BorderRadius.all(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(8.0),
                           ),
                           elevation: 1,
                           child: TextFormField(
-                            decoration:const InputDecoration(
+                            decoration: InputDecoration(
                               prefixIcon: Icon(Icons.search),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12.0),
                                 ),
                               ),
-                              labelText: 'Search guarantor by name',
+                              labelText: 'Search guarant by name',
                             ),
                             onChanged: ((value) {
                               setState(() {
@@ -107,7 +107,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                     .contains(searchString.toLowerCase())
                                 ? ListTile(
                                     dense: true,
-                                    shape: const RoundedRectangleBorder(
+                                    shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
                                     tileColor: Colors.blueGrey[100],
@@ -123,12 +123,12 @@ class _GuarantorListState extends State<GuarantorList> {
                                               children: [
                                                 Text(
                                                   guarantors[index]
-                                                      .address
+                                                      .phone
                                                       .toString(),
                                                 ),
                                                 Text(
                                                   guarantors[index]
-                                                      .gender
+                                                      .address
                                                       .toString(),
                                                 ),
                                               ],
@@ -142,7 +142,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                         showDialog(
                                           context: context,
                                           builder: ((context) {
-                                            return const AlertDialog(
+                                            return AlertDialog(
                                               backgroundColor:
                                                   Colors.transparent,
                                               content: ClipRRect(
@@ -163,11 +163,11 @@ class _GuarantorListState extends State<GuarantorList> {
                                         backgroundColor: Colors.blueGrey[200],
                                         child: guarantors[index].gender ==
                                                 'female'
-                                            ? const Icon(
-                                                Icons.house,
+                                            ? Icon(
+                                                Icons.person_add,
                                                 color: Colors.green,
                                               )
-                                            : const Icon(
+                                            : Icon(
                                                 Icons.house,
                                                 color: Colors.blueGrey,
                                               ),
@@ -175,11 +175,11 @@ class _GuarantorListState extends State<GuarantorList> {
                                     ),
                                     title: Text(
                                       guarantors[index].name.toString(),
-                                      style: const TextStyle(color: Colors.black),
+                                      style: TextStyle(color: Colors.black),
                                     ),
                                     subtitle: Text(
                                       guarantors[index].address.toString(),
-                                      style: const TextStyle(color: Colors.black),
+                                      style: TextStyle(color: Colors.black),
                                     ),
                                     // trailing:
                                     trailing: Row(
@@ -187,14 +187,14 @@ class _GuarantorListState extends State<GuarantorList> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         IconButton(
-                                              onPressed: () {
+                                            onPressed: () {
                                               print(guarantors[index].id);
                                               print(guarantors[index].name);
-                                              print(
-                                                  guarantors[index].phone);
+                                              print(guarantors[index].phone);
                                               print(guarantors[index].address);
                                               print(guarantors[index].gender);
                                               print(guarantors[index].title);
+
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
@@ -215,14 +215,14 @@ class _GuarantorListState extends State<GuarantorList> {
                                                         gender:
                                                             guarantors[index]
                                                                 .gender,
-                                                                   title:
+                                                                title:
                                                             guarantors[index]
                                                                 .title,
                                                       )),
                                                 ),
                                               );
                                             },
-                                            icon:const Icon(
+                                            icon: Icon(
                                               Icons.edit,
                                               color: Colors.blue,
                                             )),
@@ -231,13 +231,13 @@ class _GuarantorListState extends State<GuarantorList> {
                                             _showSpinner();
                                             // sending delete request
                                             var response =
-                                                await _deleteGuarantor(
+                                                await _deleteGuarant(
                                                     id: guarantors[index].id);
 
                                             if (response.statusCode == 200) {
                                               setState(() {
-                                                guarantorList =
-                                                    _getAllGuarantor();
+                                                apartmentList =
+                                                    _getAllGuarant();
                                               });
                                               Navigator.pop(context);
                                             } else {
@@ -248,7 +248,7 @@ class _GuarantorListState extends State<GuarantorList> {
                                                       'Something went wrong!');
                                             }
                                           },
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.delete,
                                             color: Colors.red,
                                           ),
@@ -263,25 +263,24 @@ class _GuarantorListState extends State<GuarantorList> {
                     ],
                   );
                 } else if (snapshot.hasError) {
-                  return const Text('No guarantor found!');
+                  return Text('No guarantor found!');
                 }
-                return const CircularProgressIndicator();
+                return CircularProgressIndicator();
               },
             ),
           ),
         ),
-       floatingActionButton: FloatingActionButton.extended(
-        onPressed: (){
-          Navigator.pushNamed(context, '/add_guarantor');
-        }
-        ,
-        label: Row(
-          children: [
-            Icon(Icons.add),
-            Text('Add guarantor'),
-          ],
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.pushNamed(context, 'add_guarantor');
+          },
+          label: Row(
+            children: [
+              Icon(Icons.add),
+              Text('Add Guarantor'),
+            ],
+          ),
         ),
-      ),
       ),
       onWillPop: () {
         Navigator.pushNamed(context, 'home');
